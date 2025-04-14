@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MSK Questions Editor</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      margin: 0;
+      padding: 20px;
+      line-height: 1.6;
+      color: #333;
+      background: #f8f9fa;
+    }
+    
+    h1 {
+      font-size: 24px;
+      color: #dd6b20;
+      margin-bottom: 20px;
+      border-bottom: 2px solid #dd6b20;
+      padding-bottom: 10px;
+    }
+    
+    .description {
+      background: #feebcb;
+      padding: 15px;
+      border-radius: 5px;
+      margin-bottom: 20px;
+      font-size: 16px;
+    }
+    
+    .textarea-container {
+      margin-bottom: 20px;
+    }
+    
+    label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    
+    textarea {
+      width: 100%;
+      height: 400px;
+      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-family: monospace;
+      font-size: 14px;
+      line-height: 1.5;
+      resize: vertical;
+    }
+    
+    .buttons {
+      display: flex;
+      gap: 10px;
+    }
+    
+    button {
+      padding: 10px 16px;
+      background-color: #dd6b20;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: 500;
+    }
+    
+    button:hover {
+      background-color: #c05621;
+    }
+    
+    button.secondary {
+      background-color: #cbd5e0;
+      color: #1a202c;
+    }
+    
+    button.secondary:hover {
+      background-color: #a0aec0;
+    }
+    
+    .status {
+      margin-top: 20px;
+      padding: 15px;
+      border-radius: 4px;
+      display: none;
+    }
+    
+    .status.success {
+      background-color: #c6f6d5;
+      color: #276749;
+      display: block;
+    }
+    
+    .status.error {
+      background-color: #fed7d7;
+      color: #c53030;
+      display: block;
+    }
+    
+    .format-example {
+      margin-top: 20px;
+      background: #f3f4f6;
+      padding: 15px;
+      border-radius: 4px;
+      overflow-x: auto;
+    }
+    
+    .format-example pre {
+      margin: 0;
+      font-size: 14px;
+    }
+    
+    .nav-links {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+    
+    .nav-links a {
+      text-decoration: none;
+      color: #dd6b20;
+      font-weight: 500;
+    }
+    
+    .nav-links a:hover {
+      text-decoration: underline;
+    }
+    
+    .current-count {
+      background-color: #e2e8f0;
+      padding: 15px;
+      border-radius: 4px;
+      margin-bottom: 20px;
+    }
+    
+    .current-count h3 {
+      margin-top: 0;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>MSK Questions Editor</h1>
+  
+  <div class="nav-links">
+    <a href="modular_mcq_quiz_app.html">Back to Quiz App</a>
+    <a href="focs_questions.html">FOCS Questions</a>
+    <a href="bcr_questions.html">BCR Questions</a>
+    <a href="msk_questions.html">MSK Questions</a>
+    <a href="anatomy_questions.html">Anatomy Questions</a>
+  </div>
+  
+  <div class="description">
+    <p>Use this editor to add or modify questions for the <strong>Musculoskeletal (MSK)</strong> module. Paste your questions in the exact JavaScript format shown below.</p>
+  </div>
+  
+  <div class="current-count">
+    <h3>Current Questions:</h3>
+    <p>You have <span id="question-count">0</span> questions in this module.</p>
+    <button id="view-btn" class="secondary">View Current Questions</button>
+  </div>
+  
+  <div class="textarea-container">
+    <label for="questions-input">Paste MSK Questions in JavaScript Format:</label>
+    <textarea id="questions-input" placeholder="Paste your questions here in the format shown below..."></textarea>
+  </div>
+  
+  <div class="buttons">
+    <button id="save-btn">Save Questions</button>
+    <button id="clear-btn" class="secondary">Clear Text Area</button>
+    <button id="reset-btn" class="secondary">Reset All MSK Questions</button>
+  </div>
+  
+  <div id="status" class="status"></div>
+  
+  <div class="format-example">
+    <h3>Expected Format:</h3>
+    <pre>{
+  question: "What is the question text?",
+  options: [
+    "A) First option",
+    "B) Second option",
+    "C) Third option",
+    "D) Fourth option",
+    "E) Fifth option"
+  ],
+  correctIndex: 2,
+  explanations: [
+    "Explanation for why option A is incorrect",
+    "Explanation for why option B is incorrect",
+    "Explanation for why option C is correct",
+    "Explanation for why option D is incorrect",
+    "Explanation for why option E is incorrect"
+  ],
+  slideLink: "Reference source or slide link",
+  topic: "Specific topic within MSK" // Optional, will be auto-detected if not provided
+}</pre>
+  </div>
+  
+  <script>
+    const STORAGE_KEY = 'mskQuestions';
+    const questionsInput = document.getElementById('questions-input');
+    const saveBtn = document.getElementById('save-btn');
+    const clearBtn = document.getElementById('clear-btn');
+    const resetBtn = document.getElementById('reset-btn');
+    const statusEl = document.getElementById('status');
+    const questionCountEl = document.getElementById('question-count');
+    const viewBtn = document.getElementById('view-btn');
+    
+    // Load current question count
+    function updateQuestionCount() {
+      try {
+        const questions = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+        questionCountEl.textContent = questions.length;
+      } catch (e) {
+        questionCountEl.textContent = '0';
+      }
+    }
+    
+    // Initialize
+    updateQuestionCount();
+    
+    // Save questions
+    saveBtn.addEventListener('click', () => {
+      const content = questionsInput.value.trim();
+      
+      if (!content) {
+        showStatus('Please enter questions in the correct format.', false);
+        return;
+      }
+      
+      try {
+        // Add opening and closing brackets to make it valid JSON array syntax
+        const jsonString = `[${content}]`;
+        
+        // Try to parse the JSON
+        let parsedQuestions;
+        try {
+          parsedQuestions = JSON.parse(jsonString);
+        } catch (e) {
+          // Try alternate parsing approach for JavaScript object format
+          try {
+            // Use Function constructor to evaluate the JS object syntax
+            parsedQuestions = new Function(`return ${jsonString}`)();
+          } catch (err) {
+            throw new Error("Invalid format. Please check your input and try again.");
+          }
+        }
+        
+        // Validate parsed questions
+        if (!Array.isArray(parsedQuestions)) {
+          throw new Error("Input must be an array of question objects");
+        }
+        
+        // Validate each question
+        parsedQuestions.forEach(validateQuestion);
+        
+        // Save to localStorage
+        const existingQuestions = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+        const newQuestions = [...existingQuestions, ...parsedQuestions];
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(newQuestions));
+        
+        // Update question count
+        updateQuestionCount();
+        
+        // Show success message
+        showStatus(`Successfully added ${parsedQuestions.length} questions. Total: ${newQuestions.length}`, true);
+        
+      } catch (error) {
+        console.error('Error parsing questions:', error);
+        showStatus(`Error: ${error.message}`, false);
+      }
+    });
+    
+    // Clear text area
+    clearBtn.addEventListener('click', () => {
+      questionsInput.value = '';
+    });
+    
+    // Reset all questions
+    resetBtn.addEventListener('click', () => {
+      if (confirm('Are you sure you want to delete ALL questions in this module? This cannot be undone.')) {
+        localStorage.removeItem(STORAGE_KEY);
+        updateQuestionCount();
+        showStatus('All MSK questions have been deleted.', true);
+      }
+    });
+    
+    // View current questions
+    viewBtn.addEventListener('click', () => {
+      try {
+        const questions = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+        
+        if (questions.length === 0) {
+          showStatus('No questions available to view.', false);
+          return;
+        }
+        
+        // Format the questions nicely with indentation and commas
+        const formattedQuestions = questions.map(q => JSON.stringify(q, null, 2)).join(',\n');
+        
+        // Set the text area content
+        questionsInput.value = formattedQuestions;
+        
+        showStatus(`Loaded ${questions.length} questions into the editor.`, true);
+      } catch (e) {
+        console.error('Error loading questions:', e);
+        showStatus('Error loading questions. Check the console for details.', false);
+      }
+    });
+    
+    // Helper to validate a question object
+    function validateQuestion(question) {
+      if (!question.question) throw new Error("Missing question text");
+      if (!Array.isArray(question.options) || question.options.length < 2) {
+        throw new Error("Options must be an array with at least 2 items");
+      }
+      if (typeof question.correctIndex !== 'number') {
+        throw new Error("correctIndex must be a number");
+      }
+      
+      // Ensure explanations array exists
+      if (!Array.isArray(question.explanations)) {
+        question.explanations = question.options.map((_, i) => 
+          i === question.correctIndex ? "Correct answer" : "Incorrect answer"
+        );
+      }
+      
+      // Ensure slideLink exists
+      if (!question.slideLink) {
+        question.slideLink = "No reference provided";
+      }
+      
+      return question;
+    }
+    
+    // Show status message
+    function showStatus(message, isSuccess) {
+      statusEl.textContent = message;
+      statusEl.className = `status ${isSuccess ? 'success' : 'error'}`;
+      
+      // Auto-hide after 5 seconds
+      setTimeout(() => {
+        statusEl.className = 'status';
+      }, 5000);
+    }
+  </script>
+</body>
+</html>
