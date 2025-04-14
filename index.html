@@ -173,8 +173,8 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#" id="topic-focus-link">
-              <i class="bi bi-bullseye me-1"></i>Topic Focus
+            <a class="nav-link" href="#" id="modules-link">
+              <i class="bi bi-grid-3x3-gap me-1"></i>Modules
             </a>
           </li>
         </ul>
@@ -358,18 +358,18 @@
       </div>
     </div>
 
-    <!-- Topic Focus View -->
+    <!-- Modules View -->
     <div id="topic-focus-view" class="view d-none">
       <div class="row">
         <div class="col-12 mb-4">
           <div class="card quiz-card">
             <div class="card-body">
-              <h5 class="card-title"><i class="bi bi-funnel me-2"></i>Filter Questions</h5>
+              <h5 class="card-title"><i class="bi bi-grid-3x3-gap me-2"></i>Select Module & Start Practice</h5>
               <div class="row g-3 mt-1">
                 <div class="col-md-6">
-                  <label for="topic-filter" class="form-label">Topic</label>
+                  <label for="topic-filter" class="form-label">Module</label>
                   <select id="topic-filter" class="form-select">
-                    <option value="all">All Topics</option>
+                    <option value="all">All Modules</option>
                     <!-- Topics will be populated here -->
                   </select>
                 </div>
@@ -422,11 +422,16 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   
-  <script type="module">
-    import { allQuestions, focsQuestions, bcrQuestions, mskQuestions, anatomyQuestions } from './questions/index.js';
+  <script>
+    // Initialize with empty arrays for questions until they're loaded
+    const allQuestions = [];
+    const focsQuestions = [];
+    const bcrQuestions = [];
+    const mskQuestions = [];
+    const anatomyQuestions = [];
     
     // App State
-    let questions = allQuestions;
+    let questions = [];
     let currentQuestionIndex = 0;
     let selectedAnswer = null;
     let answerSubmitted = false;
@@ -444,11 +449,128 @@
       msk: mskQuestions,
       anatomy: anatomyQuestions
     };
+    
+    // Load questions from server
+    async function loadQuestions() {
+      try {
+        // For now we'll use sample data
+        // These can be replaced with server-loaded questions later
+        // Add some sample questions to each module
+        addSampleQuestions();
+        
+        // Initialize app after loading questions
+        questions = [...allQuestions];
+        moduleQuestions.all = allQuestions;
+        moduleQuestions.focs = focsQuestions;
+        moduleQuestions.bcr = bcrQuestions;
+        moduleQuestions.msk = mskQuestions;
+        moduleQuestions.anatomy = anatomyQuestions;
+        
+        // Initialize the app
+        init();
+      } catch (error) {
+        console.error('Error loading questions:', error);
+      }
+    }
+    
+    // Add some sample questions for testing
+    function addSampleQuestions() {
+      // Sample FOCS question
+      focsQuestions.push({
+        question: "Which enzyme family is primarily responsible for Phase I metabolism in the liver?",
+        options: [
+          "A) Acetyltransferases",
+          "B) Glucuronosyltransferases",
+          "C) Cytochrome P450 enzymes",
+          "D) Monoamine oxidases",
+          "E) Peptidases"
+        ],
+        correctIndex: 2,
+        explanations: [
+          "Incorrect: Acetyltransferases are involved in Phase II reactions.",
+          "Incorrect: Glucuronosyltransferases are Phase II enzymes.",
+          "Correct: Cytochrome P450 enzymes mediate oxidation, reduction, and hydrolysis in Phase I metabolism.",
+          "Incorrect: Monoamine oxidases break down neurotransmitters, not general drug metabolism.",
+          "Incorrect: Peptidases degrade peptides but are not key in Phase I metabolism."
+        ],
+        slideLink: "Pharmacokinetics part1",
+        topic: "Pharmacology"
+      });
+      
+      // Sample BCR question
+      bcrQuestions.push({
+        question: "Which heart sound is associated with mitral stenosis?",
+        options: [
+          "A) Split S1",
+          "B) Opening snap",
+          "C) Midsystolic click",
+          "D) Summation gallop",
+          "E) Pericardial knock"
+        ],
+        correctIndex: 1,
+        explanations: [
+          "Incorrect: Split S1 can occur in bundle branch blocks but is not typical of mitral stenosis.",
+          "Correct: The opening snap is a high-pitched early diastolic sound heard after S2 in mitral stenosis.",
+          "Incorrect: Midsystolic click is associated with mitral valve prolapse, not stenosis.",
+          "Incorrect: Summation gallop occurs with tachycardia when S3 and S4 merge.",
+          "Incorrect: Pericardial knock is heard in constrictive pericarditis."
+        ],
+        slideLink: "Cardiovascular Examination, slide 31",
+        topic: "Cardiovascular Examination"
+      });
+      
+      // Sample MSK question
+      mskQuestions.push({
+        question: "What is the primary cellular defect in Duchenne muscular dystrophy?",
+        options: [
+          "A) Deficiency of dystrophin protein",
+          "B) Abnormal myosin heavy chain",
+          "C) Defective acetylcholine receptors",
+          "D) Mitochondrial DNA mutations",
+          "E) Abnormal calcium channel function"
+        ],
+        correctIndex: 0,
+        explanations: [
+          "Correct: Duchenne muscular dystrophy is caused by mutations in the DMD gene leading to absence of functional dystrophin protein.",
+          "Incorrect: Myosin abnormalities are associated with some congenital myopathies, not DMD.",
+          "Incorrect: Acetylcholine receptor defects cause myasthenia gravis, not muscular dystrophy.",
+          "Incorrect: Mitochondrial DNA mutations cause mitochondrial myopathies, not DMD.",
+          "Incorrect: Calcium channel dysfunction is associated with periodic paralyses, not DMD."
+        ],
+        slideLink: "Neuromuscular Disorders, Slide 7",
+        topic: "Neuromuscular Disorders"
+      });
+      
+      // Sample Anatomy question
+      anatomyQuestions.push({
+        question: "Which of the following structures passes through the carpal tunnel?",
+        options: [
+          "A) Ulnar nerve",
+          "B) Ulnar artery",
+          "C) Radial artery",
+          "D) Median nerve",
+          "E) Superficial palmar arch"
+        ],
+        correctIndex: 3,
+        explanations: [
+          "Incorrect: The ulnar nerve passes through Guyon's canal, not the carpal tunnel.",
+          "Incorrect: The ulnar artery passes superficial to the flexor retinaculum in Guyon's canal.",
+          "Incorrect: The radial artery is located at the lateral aspect of the wrist, not in the carpal tunnel.",
+          "Correct: The median nerve passes through the carpal tunnel with the flexor tendons.",
+          "Incorrect: The superficial palmar arch is located in the palm, distal to the carpal tunnel."
+        ],
+        slideLink: "Upper Limb Anatomy Lecture 4",
+        topic: "Upper Limb Anatomy"
+      });
+      
+      // Add to all questions
+      allQuestions.push(...focsQuestions, ...bcrQuestions, ...mskQuestions, ...anatomyQuestions);
+    }
 
     // DOM Elements
     const dashboardLink = document.getElementById('dashboard-link');
     const practiceLink = document.getElementById('practice-link');
-    const topicFocusLink = document.getElementById('topic-focus-link');
+    const modulesLink = document.getElementById('modules-link');
     const dashboardView = document.getElementById('dashboard-view');
     const practiceView = document.getElementById('practice-view');
     const topicFocusView = document.getElementById('topic-focus-view');
@@ -1150,7 +1272,7 @@
       // Navigation links
       dashboardLink.addEventListener('click', () => switchView('dashboard'));
       practiceLink.addEventListener('click', () => switchView('practice'));
-      topicFocusLink.addEventListener('click', () => switchView('topic-focus'));
+      modulesLink.addEventListener('click', () => switchView('topic-focus'));
       
       // Question navigation
       prevQuestion.addEventListener('click', () => {
@@ -1229,7 +1351,7 @@
       // Update navigation links
       dashboardLink.classList.toggle('active', view === 'dashboard');
       practiceLink.classList.toggle('active', view === 'practice');
-      topicFocusLink.classList.toggle('active', view === 'topic-focus');
+      modulesLink.classList.toggle('active', view === 'topic-focus');
       
       // Show/hide views
       dashboardView.classList.toggle('d-none', view !== 'dashboard');
@@ -1244,8 +1366,8 @@
       }
     }
     
-    // Initialize the app
-    init();
+    // Initialize by loading questions and starting the app
+    loadQuestions();
   </script>
 </body>
 </html>
