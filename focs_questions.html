@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FOCS Questions Editor</title>
+  <title>FOCS Questions Documentation</title>
   <style>
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
@@ -28,76 +28,6 @@
       border-radius: 5px;
       margin-bottom: 20px;
       font-size: 16px;
-    }
-    
-    .textarea-container {
-      margin-bottom: 20px;
-    }
-    
-    label {
-      display: block;
-      font-weight: 600;
-      margin-bottom: 8px;
-    }
-    
-    textarea {
-      width: 100%;
-      height: 400px;
-      padding: 12px;
-      border: 1px solid #ddd;
-      border-radius: 4px;
-      font-family: monospace;
-      font-size: 14px;
-      line-height: 1.5;
-      resize: vertical;
-    }
-    
-    .buttons {
-      display: flex;
-      gap: 10px;
-    }
-    
-    button {
-      padding: 10px 16px;
-      background-color: #2b6cb0;
-      color: white;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      font-size: 16px;
-      font-weight: 500;
-    }
-    
-    button:hover {
-      background-color: #1a4a80;
-    }
-    
-    button.secondary {
-      background-color: #cbd5e0;
-      color: #1a202c;
-    }
-    
-    button.secondary:hover {
-      background-color: #a0aec0;
-    }
-    
-    .status {
-      margin-top: 20px;
-      padding: 15px;
-      border-radius: 4px;
-      display: none;
-    }
-    
-    .status.success {
-      background-color: #c6f6d5;
-      color: #276749;
-      display: block;
-    }
-    
-    .status.error {
-      background-color: #fed7d7;
-      color: #c53030;
-      display: block;
     }
     
     .format-example {
@@ -129,21 +59,57 @@
       text-decoration: underline;
     }
     
-    .current-count {
-      background-color: #e2e8f0;
+    .instruction-box {
+      background-color: #c6f6d5;
       padding: 15px;
       border-radius: 4px;
       margin-bottom: 20px;
     }
     
-    .current-count h3 {
+    .instruction-box h3 {
       margin-top: 0;
       margin-bottom: 10px;
+    }
+    
+    .instruction-step {
+      background-color: #e2e8f0;
+      padding: 10px 15px;
+      border-radius: 4px;
+      margin-bottom: 10px;
+    }
+    
+    .instruction-step h4 {
+      margin-top: 0;
+      margin-bottom: 5px;
+    }
+    
+    .edit-area {
+      background-color: #ebf8ff;
+      border: 1px dashed #2b6cb0;
+      padding: 15px;
+      border-radius: 4px;
+      margin: 20px 0;
+    }
+    
+    .btn {
+      display: inline-block;
+      padding: 8px 16px;
+      background-color: #2b6cb0;
+      color: white;
+      text-decoration: none;
+      border-radius: 4px;
+      font-weight: 500;
+      cursor: pointer;
+      border: none;
+    }
+    
+    .btn:hover {
+      background-color: #1a4a80;
     }
   </style>
 </head>
 <body>
-  <h1>FOCS Questions Editor</h1>
+  <h1>FOCS Questions Documentation</h1>
   
   <div class="nav-links">
     <a href="index.html">Back to Quiz App</a>
@@ -154,30 +120,60 @@
   </div>
   
   <div class="description">
-    <p>Use this editor to add or modify questions for the <strong>Foundations of Clinical Science (FOCS)</strong> module. Paste your questions in the exact JavaScript format shown below.</p>
+    <p>The <strong>Foundations of Clinical Science (FOCS)</strong> module questions are now managed directly from the backend.</p>
   </div>
   
-  <div class="current-count">
-    <h3>Current Questions:</h3>
-    <p>You have <span id="question-count">0</span> questions in this module.</p>
-    <button id="view-btn" class="secondary">View Current Questions</button>
+  <div class="instruction-box">
+    <h3>How to Add Questions:</h3>
+    <div class="instruction-step">
+      <h4>Step 1: Edit the JavaScript File</h4>
+      <p>Questions are stored in <code>questions/focs_questions.js</code>. Edit this file to add, remove, or modify questions.</p>
+    </div>
+    <div class="instruction-step">
+      <h4>Step 2: Follow the Required Format</h4>
+      <p>Each question must follow the format shown below.</p>
+    </div>
+    <div class="instruction-step">
+      <h4>Step 3: Restart the Application</h4>
+      <p>After making changes to the question files, restart the application for changes to take effect.</p>
+    </div>
   </div>
   
-  <div class="textarea-container">
-    <label for="questions-input">Paste FOCS Questions in JavaScript Format:</label>
-    <textarea id="questions-input" placeholder="Paste your questions here in the format shown below..."></textarea>
-  </div>
+  <div class="edit-area">
+    <h3>Where to Add Your Questions:</h3>
+    <p>Open the file <code>questions/focs_questions.js</code> and edit the array of questions. Below is the location where you should add your questions:</p>
+    <pre>// FOCS Questions - Foundations of Clinical Science
+const focsQuestions = [
+  // EXISTING QUESTIONS WILL BE HERE
   
-  <div class="buttons">
-    <button id="save-btn">Save Questions</button>
-    <button id="clear-btn" class="secondary">Clear Text Area</button>
-    <button id="reset-btn" class="secondary">Reset All FOCS Questions</button>
+  // ADD YOUR NEW QUESTIONS HERE
+  // Example format:
+  {
+    question: "Your new question text",
+    options: [
+      "A) Option 1",
+      "B) Option 2",
+      "C) Option 3",
+      "D) Option 4",
+      "E) Option 5"
+    ],
+    correctIndex: 2, // Index of the correct answer (0-based)
+    explanations: [
+      "Explanation for option A",
+      "Explanation for option B",
+      "Explanation for option C",
+      "Explanation for option D",
+      "Explanation for option E"
+    ],
+    slideLink: "Reference source",
+    topic: "Topic name"
+  },
+  // You can add multiple questions separated by commas
+];</pre>
   </div>
-  
-  <div id="status" class="status"></div>
   
   <div class="format-example">
-    <h3>Expected Format:</h3>
+    <h3>Question Format:</h3>
     <pre>{
   question: "What is the question text?",
   options: [
@@ -196,157 +192,21 @@
     "Explanation for why option E is incorrect"
   ],
   slideLink: "Reference source or slide link",
-  topic: "Specific topic within FOCS" // Optional, will be auto-detected if not provided
+  topic: "Specific topic within FOCS"
 }</pre>
   </div>
   
-  <script>
-    const STORAGE_KEY = 'focsQuestions';
-    const questionsInput = document.getElementById('questions-input');
-    const saveBtn = document.getElementById('save-btn');
-    const clearBtn = document.getElementById('clear-btn');
-    const resetBtn = document.getElementById('reset-btn');
-    const statusEl = document.getElementById('status');
-    const questionCountEl = document.getElementById('question-count');
-    const viewBtn = document.getElementById('view-btn');
-    
-    // Load current question count
-    function updateQuestionCount() {
-      try {
-        const questions = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-        questionCountEl.textContent = questions.length;
-      } catch (e) {
-        questionCountEl.textContent = '0';
-      }
-    }
-    
-    // Initialize
-    updateQuestionCount();
-    
-    // Save questions
-    saveBtn.addEventListener('click', () => {
-      const content = questionsInput.value.trim();
-      
-      if (!content) {
-        showStatus('Please enter questions in the correct format.', false);
-        return;
-      }
-      
-      try {
-        // Add opening and closing brackets to make it valid JSON array syntax
-        const jsonString = `[${content}]`;
-        
-        // Try to parse the JSON
-        let parsedQuestions;
-        try {
-          parsedQuestions = JSON.parse(jsonString);
-        } catch (e) {
-          // Try alternate parsing approach for JavaScript object format
-          try {
-            // Use Function constructor to evaluate the JS object syntax
-            parsedQuestions = new Function(`return ${jsonString}`)();
-          } catch (err) {
-            throw new Error("Invalid format. Please check your input and try again.");
-          }
-        }
-        
-        // Validate parsed questions
-        if (!Array.isArray(parsedQuestions)) {
-          throw new Error("Input must be an array of question objects");
-        }
-        
-        // Validate each question
-        parsedQuestions.forEach(validateQuestion);
-        
-        // Save to localStorage
-        const existingQuestions = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-        const newQuestions = [...existingQuestions, ...parsedQuestions];
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(newQuestions));
-        
-        // Update question count
-        updateQuestionCount();
-        
-        // Show success message
-        showStatus(`Successfully added ${parsedQuestions.length} questions. Total: ${newQuestions.length}`, true);
-        
-      } catch (error) {
-        console.error('Error parsing questions:', error);
-        showStatus(`Error: ${error.message}`, false);
-      }
-    });
-    
-    // Clear text area
-    clearBtn.addEventListener('click', () => {
-      questionsInput.value = '';
-    });
-    
-    // Reset all questions
-    resetBtn.addEventListener('click', () => {
-      if (confirm('Are you sure you want to delete ALL questions in this module? This cannot be undone.')) {
-        localStorage.removeItem(STORAGE_KEY);
-        updateQuestionCount();
-        showStatus('All FOCS questions have been deleted.', true);
-      }
-    });
-    
-    // View current questions
-    viewBtn.addEventListener('click', () => {
-      try {
-        const questions = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-        
-        if (questions.length === 0) {
-          showStatus('No questions available to view.', false);
-          return;
-        }
-        
-        // Format the questions nicely with indentation and commas
-        const formattedQuestions = questions.map(q => JSON.stringify(q, null, 2)).join(',\n');
-        
-        // Set the text area content
-        questionsInput.value = formattedQuestions;
-        
-        showStatus(`Loaded ${questions.length} questions into the editor.`, true);
-      } catch (e) {
-        console.error('Error loading questions:', e);
-        showStatus('Error loading questions. Check the console for details.', false);
-      }
-    });
-    
-    // Helper to validate a question object
-    function validateQuestion(question) {
-      if (!question.question) throw new Error("Missing question text");
-      if (!Array.isArray(question.options) || question.options.length < 2) {
-        throw new Error("Options must be an array with at least 2 items");
-      }
-      if (typeof question.correctIndex !== 'number') {
-        throw new Error("correctIndex must be a number");
-      }
-      
-      // Ensure explanations array exists
-      if (!Array.isArray(question.explanations)) {
-        question.explanations = question.options.map((_, i) => 
-          i === question.correctIndex ? "Correct answer" : "Incorrect answer"
-        );
-      }
-      
-      // Ensure slideLink exists
-      if (!question.slideLink) {
-        question.slideLink = "No reference provided";
-      }
-      
-      return question;
-    }
-    
-    // Show status message
-    function showStatus(message, isSuccess) {
-      statusEl.textContent = message;
-      statusEl.className = `status ${isSuccess ? 'success' : 'error'}`;
-      
-      // Auto-hide after 5 seconds
-      setTimeout(() => {
-        statusEl.className = 'status';
-      }, 5000);
-    }
-  </script>
+  <div class="instruction-box" style="background-color: #fef3c7; margin-top: 20px;">
+    <h3>Important Notes:</h3>
+    <ul>
+      <li>Questions are now loaded directly from JavaScript files, not from localStorage</li>
+      <li>The editor interface has been removed to protect question integrity</li>
+      <li>All changes must be made in the source code files</li>
+    </ul>
+  </div>
+  
+  <p style="margin-top: 30px; text-align: center;">
+    <a href="modular_mcq_quiz_app.html" class="btn">Return to Quiz App</a>
+  </p>
 </body>
 </html>
