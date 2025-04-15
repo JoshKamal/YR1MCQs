@@ -360,16 +360,83 @@
 
     <!-- Modules View -->
     <div id="topic-focus-view" class="view d-none">
+      <div class="row mb-4">
+        <div class="col-12">
+          <div class="card quiz-card">
+            <div class="card-body">
+              <h5 class="card-title"><i class="bi bi-grid-3x3-gap me-2"></i>Select Module</h5>
+              <div class="row g-3 mt-3">
+                <div class="col-md-3 mb-3">
+                  <div class="card h-100 bg-light module-card" data-module="all">
+                    <div class="card-body text-center">
+                      <h5 class="card-title">All Modules</h5>
+                      <p class="card-text text-muted">Practice with questions from all modules</p>
+                      <button class="btn btn-primary module-select-btn" data-module="all">
+                        <i class="bi bi-play-fill me-1"></i>Start Practice
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-3 mb-3">
+                  <div class="card h-100 bg-light module-card" data-module="focs">
+                    <div class="card-body text-center">
+                      <h5 class="card-title">FOCS</h5>
+                      <p class="card-text text-muted">Fundamentals of Clinical Science</p>
+                      <button class="btn btn-primary module-select-btn" data-module="focs">
+                        <i class="bi bi-play-fill me-1"></i>Start Practice
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-3 mb-3">
+                  <div class="card h-100 bg-light module-card" data-module="bcr">
+                    <div class="card-body text-center">
+                      <h5 class="card-title">BCR</h5>
+                      <p class="card-text text-muted">Blood, Cardiovascular and Respiratory</p>
+                      <button class="btn btn-primary module-select-btn" data-module="bcr">
+                        <i class="bi bi-play-fill me-1"></i>Start Practice
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-3 mb-3">
+                  <div class="card h-100 bg-light module-card" data-module="msk">
+                    <div class="card-body text-center">
+                      <h5 class="card-title">MSK</h5>
+                      <p class="card-text text-muted">Musculoskeletal</p>
+                      <button class="btn btn-primary module-select-btn" data-module="msk">
+                        <i class="bi bi-play-fill me-1"></i>Start Practice
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-3 mb-3">
+                  <div class="card h-100 bg-light module-card" data-module="anatomy">
+                    <div class="card-body text-center">
+                      <h5 class="card-title">Anatomy</h5>
+                      <p class="card-text text-muted">Anatomical Structures</p>
+                      <button class="btn btn-primary module-select-btn" data-module="anatomy">
+                        <i class="bi bi-play-fill me-1"></i>Start Practice
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
       <div class="row">
         <div class="col-12 mb-4">
           <div class="card quiz-card">
             <div class="card-body">
-              <h5 class="card-title"><i class="bi bi-grid-3x3-gap me-2"></i>Select Module & Start Practice</h5>
+              <h5 class="card-title"><i class="bi bi-funnel me-2"></i>Advanced Filter Options</h5>
               <div class="row g-3 mt-1">
                 <div class="col-md-6">
-                  <label for="topic-filter" class="form-label">Module</label>
+                  <label for="topic-filter" class="form-label">Topic</label>
                   <select id="topic-filter" class="form-select">
-                    <option value="all">All Modules</option>
+                    <option value="all">All Topics</option>
                     <!-- Topics will be populated here -->
                   </select>
                 </div>
@@ -385,7 +452,7 @@
                 </div>
                 <div class="col-12">
                   <button id="start-focused-practice" class="btn btn-primary mt-2">
-                    <i class="bi bi-play-fill me-1"></i>Start Practice
+                    <i class="bi bi-play-fill me-1"></i>Start Practice with Filters
                   </button>
                 </div>
               </div>
@@ -14141,8 +14208,8 @@
     ],
     "slideLink": "Lecture 12 – Cytoskeleton (Slide: Microtubule function)"
   }
-			
-     );
+			 
+      );
       
       // Sample BCR question
       bcrQuestions.push({
@@ -14296,8 +14363,6 @@
       }
       currentQuestionIndex = 0;
     }
-
-
     
     // Load current question
     function loadQuestion() {
@@ -14326,7 +14391,6 @@
         optionDiv.className = 'quiz-option';
         optionDiv.textContent = option;
         optionDiv.dataset.index = index;
-
         
         // Check if this question has been answered in this session
         const historyItem = findQuestionInHistory(currentQuestionIndex);
@@ -14726,8 +14790,11 @@
     
     // Update topic filters
     function updateTopicFilters() {
-      // Get all unique topics
-      const allTopics = [...new Set(questions.map(q => q.topic))];
+      // Create a combined list of all questions from all modules
+      const allQuestionsForFilters = [...allQuestions];
+      
+      // Get all unique topics from the combined questions
+      const allTopics = [...new Set(allQuestionsForFilters.map(q => q.topic))];
       
       // Clear existing options (keeping the 'All Topics' option)
       while (topicFilter.options.length > 1) {
@@ -14868,17 +14935,30 @@
       const selectedTopic = topicFilter.value;
       const selectedStatus = statusFilter.value;
       
+      // Start with all available questions from all modules
+      let combinedQuestions = [];
+      for (const moduleKey in moduleQuestions) {
+        combinedQuestions = [...combinedQuestions, ...moduleQuestions[moduleKey]];
+      }
+      
+      // Remove duplicates (might be in multiple modules)
+      const uniqueQuestions = Array.from(new Set(combinedQuestions.map(q => q.question)))
+        .map(question => combinedQuestions.find(q => q.question === question));
+      
       // Filter questions based on topic
-      let filteredQuestions = questions;
+      let filteredQuestions = uniqueQuestions;
       if (selectedTopic !== 'all') {
-        filteredQuestions = questions.filter(q => q.topic === selectedTopic);
+        filteredQuestions = uniqueQuestions.filter(q => q.topic === selectedTopic);
       }
       
       // Filter questions based on status
       if (selectedStatus !== 'all') {
         filteredQuestions = filteredQuestions.filter(q => {
           const historyItem = userHistory.find(item => {
-            return questions[item.questionIndex].question === q.question;
+            const questionInHistory = uniqueQuestions.find(question => 
+              question.question === (item.questionIndex < uniqueQuestions.length ? 
+                uniqueQuestions[item.questionIndex].question : null));
+            return questionInHistory && questionInHistory.question === q.question;
           });
           
           switch (selectedStatus) {
@@ -14923,6 +15003,36 @@
       dashboardLink.addEventListener('click', () => switchView('dashboard'));
       practiceLink.addEventListener('click', () => switchView('practice'));
       modulesLink.addEventListener('click', () => switchView('topic-focus'));
+      
+      // Module selection buttons
+      document.querySelectorAll('.module-select-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const moduleType = btn.getAttribute('data-module');
+          if (moduleType) {
+            // Set the current module
+            currentModule = moduleType;
+            
+            // Update the module badge text
+            const moduleName = moduleType === 'all' ? 'All Modules' : moduleType.toUpperCase();
+            currentModuleBadge.textContent = moduleName;
+            
+            // Reset and shuffle questions for this module
+            questions = [...moduleQuestions[moduleType]];
+            shuffleQuestions();
+            
+            // Reset session stats
+            currentSessionStats = {
+              attempted: 0,
+              correct: 0
+            };
+            updateSessionStats();
+            
+            // Load the first question and switch to practice view
+            loadQuestion();
+            switchView('practice');
+          }
+        });
+      });
       
       // Question navigation
       prevQuestion.addEventListener('click', () => {
