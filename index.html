@@ -479,7 +479,8 @@
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script
+  <script src="bcr-data.js"></script>
   
   <script>
     // Initialize with empty arrays for questions until they're loaded
@@ -14374,26 +14375,7 @@
     );
       
       // Sample BCR question
-      bcrQuestions.push({
-        question: "Which heart sound is associated with mitral stenosis?",
-        options: [
-          "A) Split S1",
-          "B) Opening snap",
-          "C) Midsystolic click",
-          "D) Summation gallop",
-          "E) Pericardial knock"
-        ],
-        correctIndex: 1,
-        explanations: [
-          "Incorrect: Split S1 can occur in bundle branch blocks but is not typical of mitral stenosis.",
-          "Correct: The opening snap is a high-pitched early diastolic sound heard after S2 in mitral stenosis.",
-          "Incorrect: Midsystolic click is associated with mitral valve prolapse, not stenosis.",
-          "Incorrect: Summation gallop occurs with tachycardia when S3 and S4 merge.",
-          "Incorrect: Pericardial knock is heard in constrictive pericarditis."
-        ],
-        slideLink: "Cardiovascular Examination, slide 31",
-        topic: "Cardiovascular Examination"
-      });
+      bcrQuestions.push(...bcrData);
       
       // Sample MSK question
       mskQuestions.push({
