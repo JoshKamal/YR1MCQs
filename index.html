@@ -424,10 +424,59 @@
   
   <script>
     // Initialize with empty arrays for questions until they're loaded
-    const allQuestions = []:
-    const focsQuestions = [
-
-      {
+    const allQuestions = [];
+    const focsQuestions = [];
+    const bcrQuestions = [];
+    const mskQuestions = [];
+    const anatomyQuestions = [];
+    
+    // App State
+    let questions = [];
+    let currentQuestionIndex = 0;
+    let selectedAnswer = null;
+    let answerSubmitted = false;
+    let userHistory = [];
+    let currentSessionStats = {
+      attempted: 0,
+      correct: 0
+    };
+    let currentView = 'dashboard';
+    let currentModule = 'all';
+    let moduleQuestions = {
+      all: allQuestions,
+      focs: focsQuestions,
+      bcr: bcrQuestions,
+      msk: mskQuestions,
+      anatomy: anatomyQuestions
+    };
+    
+    // Load questions from server
+    async function loadQuestions() {
+      try {
+        // For now we'll use sample data
+        // These can be replaced with server-loaded questions later
+        // Add some sample questions to each module
+        addSampleQuestions();
+        
+        // Initialize app after loading questions
+        questions = [...allQuestions];
+        moduleQuestions.all = allQuestions;
+        moduleQuestions.focs = focsQuestions;
+        moduleQuestions.bcr = bcrQuestions;
+        moduleQuestions.msk = mskQuestions;
+        moduleQuestions.anatomy = anatomyQuestions;
+        
+        // Initialize the app
+        init();
+      } catch (error) {
+        console.error('Error loading questions:', error);
+      }
+    }
+    
+    // Add some sample questions for testing
+    function addSampleQuestions() {
+      // Sample FOCS question
+      focsQuestions.push({
 		  
         question: "A 23-year-old student has been feeling increasingly fatigued and notices his heart rate is elevated. A blood test reveals increased serum lactate levels. Which of the following best explains why a lack of oxygen leads to lactate accumulation?",
         options: [
@@ -14092,90 +14141,8 @@
     ],
     "slideLink": "Lecture 12 – Cytoskeleton (Slide: Microtubule function)"
   }
-
-      
-    ];
-    const bcrQuestions = [
-
-      
-    ];
-    const mskQuestions = [
-
-      
-    ];
-    const anatomyQuestions = [
-
-
-      
-    ];
-
-  
-
-
-
-    
-    // App State
-    let questions = [];
-    let currentQuestionIndex = 0;
-    let selectedAnswer = null;
-    let answerSubmitted = false;
-    let userHistory = [];
-    let currentSessionStats = {
-      attempted: 0,
-      correct: 0
-    };
-    let currentView = 'dashboard';
-    let currentModule = 'all';
-    let moduleQuestions = {
-      all: allQuestions,
-      focs: focsQuestions,
-      bcr: bcrQuestions,
-      msk: mskQuestions,
-      anatomy: anatomyQuestions
-    };
-    
-    // Load questions from server
-    async function loadQuestions() {
-      try {
-        
-        // Initialize app after loading questions
-        questions = [...allQuestions];
-        moduleQuestions.all = allQuestions;
-        moduleQuestions.focs = focsQuestions;
-        moduleQuestions.bcr = bcrQuestions;
-        moduleQuestions.msk = mskQuestions;
-        moduleQuestions.anatomy = anatomyQuestions;
-        
-        // Initialize the app
-        init();
-      } catch (error) {
-        console.error('Error loading questions:', error);
-      }
-    }
-    
-    // Add some sample questions for testing
-    function addSampleQuestions() {
-      // Sample FOCS question
-      focsQuestions.push({
-        question: "Which enzyme family is primarily responsible for Phase I metabolism in the liver?",
-        options: [
-          "A) Acetyltransferases",
-          "B) Glucuronosyltransferases",
-          "C) Cytochrome P450 enzymes",
-          "D) Monoamine oxidases",
-          "E) Peptidases"
-        ],
-        correctIndex: 2,
-        explanations: [
-          "Incorrect: Acetyltransferases are involved in Phase II reactions.",
-          "Incorrect: Glucuronosyltransferases are Phase II enzymes.",
-          "Correct: Cytochrome P450 enzymes mediate oxidation, reduction, and hydrolysis in Phase I metabolism.",
-          "Incorrect: Monoamine oxidases break down neurotransmitters, not general drug metabolism.",
-          "Incorrect: Peptidases degrade peptides but are not key in Phase I metabolism."
-        ],
-        slideLink: "Pharmacokinetics part1",
-        topic: "Pharmacology"
-      });
+			
+     );
       
       // Sample BCR question
       bcrQuestions.push({
