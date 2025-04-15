@@ -15697,6 +15697,15 @@
           event.preventDefault();
           const module = event.target.dataset.module;
           currentModule = module;
+
+           // Update badge
+          currentModuleBadge.textContent = module === 'all' ? 'All Questions' : module.toUpperCase();
+          
+          // Reset session stats
+          currentSessionStats = {
+            attempted: 0,
+            correct: 0
+          };
           
           
           
@@ -15741,7 +15750,7 @@
           // Load the first question
           currentQuestionIndex = 0;
           loadQuestion();
-          
+          updateSessionStats();
         });
       });
       
