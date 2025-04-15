@@ -15698,14 +15698,7 @@
           const module = event.target.dataset.module;
           currentModule = module;
           
-          // Update badge
-          currentModuleBadge.textContent = module === 'all' ? 'All Questions' : module.toUpperCase();
           
-          // Reset session stats
-          currentSessionStats = {
-            attempted: 0,
-            correct: 0
-          };
           
           // Check if we have a saved order for this module in localStorage
           let savedOrder = null;
