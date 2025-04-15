@@ -709,16 +709,16 @@
     // Add sample questions for testing
     function addSampleQuestions() {
       // FOCS questions
-      focsQuestions.push(focsData);
+      focsQuestions.push(...focsData);
       
       // Sample BCR question
-      bcrQuestions.push(bcrData);
+      bcrQuestions.push(...bcrData);
       
       // Sample MSK question
-      mskQuestions.push(mskData);
+      mskQuestions.push(...mskData);
       
       // Sample Anatomy question
-      anatomyQuestions.push(anatomyData);
+      anatomyQuestions.push(...anatomyData);
       
       // Add to all questions
       allQuestions.push(...focsQuestions, ...bcrQuestions, ...mskQuestions, ...anatomyQuestions);
