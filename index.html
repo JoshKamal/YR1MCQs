@@ -14322,11 +14322,14 @@
       
       // Populate options
       question.options.forEach((option, index) => {
-	shuffleQuestion(option);
         const optionDiv = document.createElement('div');
         optionDiv.className = 'quiz-option';
         optionDiv.textContent = option;
         optionDiv.dataset.index = index;
+	shuffleQuestion(option);
+
+	q.shuffledOptions = option;
+        q.shuffledCorrectIndex = option.findIndex(opt => opt.index === q.correctIndex);
         
         // Check if this question has been answered in this session
         const historyItem = findQuestionInHistory(currentQuestionIndex);
