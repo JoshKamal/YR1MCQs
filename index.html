@@ -14296,6 +14296,8 @@
       }
       currentQuestionIndex = 0;
     }
+
+
     
     // Load current question
     function loadQuestion() {
@@ -14320,6 +14322,7 @@
       
       // Populate options
       question.options.forEach((option, index) => {
+	shuffleQuestion(option);
         const optionDiv = document.createElement('div');
         optionDiv.className = 'quiz-option';
         optionDiv.textContent = option;
