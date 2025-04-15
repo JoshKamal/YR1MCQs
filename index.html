@@ -15691,6 +15691,66 @@
       dashboardLink.addEventListener('click', () => switchView('dashboard'));
       practiceLink.addEventListener('click', async () => await switchView('practice'));
       modulesLink.addEventListener('click', () => switchView('topic-focus'));
+
+      document.querySelectorAll('.dropdown-menu a[data-module]').forEach(item => {
+        item.addEventListener('click', async (event) => {
+          event.preventDefault();
+          const module = event.target.dataset.module;
+          currentModule = module;
+          
+          // Update badge
+          currentModuleBadge.textContent = module === 'all' ? 'All Questions' : module.toUpperCase();
+          
+          // Reset session stats
+          currentSessionStats = {
+            attempted: 0,
+            correct: 0
+          };
+          
+          // Check if we have a saved order for this module in localStorage
+          let savedOrder = null;
+          if (currentUserId) {
+            try {
+              savedOrder = await fetchQuestionOrder(currentUserId, module);
+              console.log(`Module ${module}: Found saved order with ${savedOrder ? savedOrder.length : 0} questions`);
+            } catch(error) {
+              console.error(`Error fetching order for module ${module}:`, error);
+            }
+          }
+          
+          if (savedOrder && Array.isArray(savedOrder) && savedOrder.length > 0) {
+            // We have a saved order, use it to maintain consistency
+            questions = [];
+            const allModuleQuestions = [...moduleQuestions[module]];
+            const questionMap = new Map(allModuleQuestions.map(q => [q.question, q]));
+            
+            // First add questions from the saved order
+            savedOrder.forEach(questionText => {
+              if (questionMap.has(questionText)) {
+                questions.push(questionMap.get(questionText));
+                questionMap.delete(questionText);
+              }
+            });
+            
+            // Add any new questions that weren't in the saved order
+            questionMap.forEach(q => questions.push(q));
+            
+            console.log(`Loaded ${questions.length} questions based on saved order for module ${module}`);
+          } else {
+            // No saved order, create a new one
+            // First get raw questions
+            questions = [...moduleQuestions[module]];
+            
+            // Then filter and shuffle them
+            await filterUnseenQuestions();
+          }
+          
+          // Load the first question
+          currentQuestionIndex = 0;
+          loadQuestion();
+          updateSessionStats();
+        });
+      });
       
       // Module filter buttons
       document.querySelectorAll('.module-filter-btn').forEach(btn => {
