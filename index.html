@@ -392,11 +392,37 @@
     </div>
   </div>
 
+  <!-- Load data files -->
   <script src="bcr-data1.js"></script>
   <script src="bcr-data2.js"></script>
   <script src="bcr-data3.js"></script>
   <script src="bcr-data4.js"></script>
   <script src="focs-data.js"></script>
+  
+  <!-- Add error handling in case files don't load -->
+  <script>
+    // Initialize with empty arrays if data files fail to load
+    if (typeof focsData === 'undefined') {
+      var focsData = [];
+      console.warn('focsData not loaded, using empty array');
+    }
+    if (typeof bcrData1 === 'undefined') {
+      var bcrData1 = [];
+      console.warn('bcrData1 not loaded, using empty array');
+    }
+    if (typeof bcrData2 === 'undefined') {
+      var bcrData2 = [];
+      console.warn('bcrData2 not loaded, using empty array');
+    }
+    if (typeof bcrData3 === 'undefined') {
+      var bcrData3 = [];
+      console.warn('bcrData3 not loaded, using empty array');
+    }
+    if (typeof bcrData4 === 'undefined') {
+      var bcrData4 = [];
+      console.warn('bcrData4 not loaded, using empty array');
+    }
+  </script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   
@@ -858,6 +884,9 @@
         : 0;
       
       sessionAccuracy.textContent = `${accuracy}%`;
+      
+      // Update the session stats display
+      document.getElementById('session-stats').textContent = `Correct: ${currentSessionStats.correct}/${currentSessionStats.attempted} (${accuracy}%)`;
     }
     
     // Update dashboard stats
@@ -876,8 +905,11 @@
       totalCorrect.textContent = correctQuestions;
       overallAccuracy.textContent = `${accuracy}%`;
       
-      // Update progress bar
+      // Update progress bar (ensure it's visible)
       accuracyProgress.style.width = `${accuracy}%`;
+      accuracyProgress.setAttribute('aria-valuenow', accuracy);
+      accuracyProgress.setAttribute('aria-valuemin', '0');
+      accuracyProgress.setAttribute('aria-valuemax', '100');
       
       // Update recent activity
       updateRecentActivity();
