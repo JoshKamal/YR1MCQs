@@ -478,12 +478,26 @@
     
     // Load questions from data files
     function addSampleQuestions() {
-      // Example placeholder: Replace these with actual data imports like `focs1Data`, etc.
-      focs1Questions.push(...focsData);
-      bcr1Questions.push(...bcrData1);
-      bcr2Questions.push(...bcrData2);
-      bcr3Questions.push(...bcrData3);
-      bcr4Questions.push(...bcrData4);
+      // Using the data exactly as defined in the original data files
+      if (typeof focsData !== 'undefined') {
+        focs1Questions.push(...focsData);
+      }
+      
+      if (typeof bcrData1 !== 'undefined') {
+        bcr1Questions.push(...bcrData1);
+      }
+      
+      if (typeof bcrData2 !== 'undefined') {
+        bcr2Questions.push(...bcrData2);
+      }
+      
+      if (typeof bcrData3 !== 'undefined') {
+        bcr3Questions.push(...bcrData3);
+      }
+      
+      if (typeof bcrData4 !== 'undefined') {
+        bcr4Questions.push(...bcrData4);
+      }
       
       msk1Questions.push({
         question: "What enzyme is deficient in McArdle disease?",
