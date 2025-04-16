@@ -569,7 +569,13 @@
           focs1Questions.push(...focsData);
         }
         
+        if (typeof bcrData1 !== 'undefined') {
+          bcr1Questions.push(...bcrData1);
+        }
         
+        if (typeof bcrData2 !== 'undefined') {
+          bcr2Questions.push(...bcrData2);
+        }
         
         // Try to use bcr3 and bcr4 data if they loaded properly
         if (typeof bcrData3 !== 'undefined' && bcrData3.length > 0) {
