@@ -403,15 +403,7 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   
   <script>
-    // This script fixes syntax issues in the data files
-    // Safely create placeholders for modules that might not load
-    if (typeof bcrData3 === 'undefined') {
-      window.bcrData3 = [];
-    }
 
-    if (typeof bcrData4 === 'undefined') {
-      window.bcrData4 = [];
-    }
     
     // Initialize with empty arrays for questions
     const allQuestions = [];
@@ -487,58 +479,7 @@
       anatomy: anatomyQuestions
     };
     
-    // Try to manually parse the BCR3 file if it's not loading
-    function tryLoadBCR3AndBCR4() {
-      // If the data files failed to load properly, we'll try to load them manually
-      if (bcrData3.length === 0 || bcrData4.length === 0) {
-        // Using fetch to get the raw content of the files
-        fetch('bcr-data3.js')
-          .then(response => response.text())
-          .then(text => {
-            try {
-              // Extract just the JSON array part
-              let jsonText = text.replace(/^.*?\[/s, '[');
-              // Handle any potential trailing content
-              jsonText = jsonText.replace(/\][^]*$/, ']');
-              
-              // Parse it as JSON
-              const data = JSON.parse(jsonText);
-              // Use the data
-              bcr3Questions.push(...data);
-              // Also add to all questions
-              allQuestions.push(...data);
-              
-              console.log("Successfully loaded bcr-data3.js with " + data.length + " questions");
-            } catch (e) {
-              console.error("Error processing bcr-data3.js", e);
-            }
-          })
-          .catch(error => console.error("Error fetching bcr-data3.js", error));
-        
-        fetch('bcr-data4.js')
-          .then(response => response.text())
-          .then(text => {
-            try {
-              // Extract just the JSON array part
-              let jsonText = text.replace(/^.*?\[/s, '[');
-              // Handle any potential trailing content
-              jsonText = jsonText.replace(/\][^]*$/, ']');
-              
-              // Parse it as JSON
-              const data = JSON.parse(jsonText);
-              // Use the data
-              bcr4Questions.push(...data);
-              // Also add to all questions
-              allQuestions.push(...data);
-              
-              console.log("Successfully loaded bcr-data4.js with " + data.length + " questions");
-            } catch (e) {
-              console.error("Error processing bcr-data4.js", e);
-            }
-          })
-          .catch(error => console.error("Error fetching bcr-data4.js", error));
-      }
-    }
+   
     
     // Function to reload questions in case data files load asynchronously
     function reloadQuestions() {
@@ -578,11 +519,11 @@
         }
         
         // Try to use bcr3 and bcr4 data if they loaded properly
-        if (typeof bcrData3 !== 'undefined' && bcrData3.length > 0) {
+        if (typeof bcrData3 !== 'undefined') {
           bcr3Questions.push(...bcrData3);
         }
         
-        if (typeof bcrData4 !== 'undefined' && bcrData4.length > 0) {
+        if (typeof bcrData4 !== 'undefined') {
           bcr4Questions.push(...bcrData4);
         }
         
@@ -654,12 +595,6 @@
         // Set initial questions to all questions
         questions = [...allQuestions];
         
-        // Try additional loading for BCR3 and BCR4
-        tryLoadBCR3AndBCR4();
-      } catch (error) {
-        console.error("Error loading questions:", error);
-      }
-    }
     
     // Event listeners
     function setupEventListeners() {
