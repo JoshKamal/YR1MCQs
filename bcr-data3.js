@@ -1,6 +1,5 @@
 // bcr-data.js
 const bcrData3 = [
-
 {
   "question": "Which intrinsic factor plays a dominant role in the autoregulation of cerebral blood flow?",
   "options": [
@@ -8517,4 +8516,5 @@ const bcrData3 = [
   ],
   "slideLink": "Lecture45_BCR.pdf"
 }
+  
 ];
