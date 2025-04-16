@@ -180,9 +180,7 @@
             <button id="start-new-session" class="btn btn-outline-success me-2">
               <i class="bi bi-play-circle me-1"></i>Start New Session
             </button>
-            <button id="export-data" class="btn btn-outline-primary me-2">
-              <i class="bi bi-download me-1"></i>Export Data
-            </button>
+           
             <button id="reset-data" class="btn btn-outline-danger">
               <i class="bi bi-trash me-1"></i>Reset Data
             </button>
@@ -239,11 +237,18 @@
           Change Module
         </button>
         <ul class="dropdown-menu" aria-labelledby="moduleDropdown">
-          <li><a class="dropdown-item" href="#" data-module="all">All Questions</a></li>
-          <li><a class="dropdown-item" href="#" data-module="focs">FOCS</a></li>
-          <li><a class="dropdown-item" href="#" data-module="bcr">BCR</a></li>
-          <li><a class="dropdown-item" href="#" data-module="msk">MSK</a></li>
-          <li><a class="dropdown-item" href="#" data-module="anatomy">Anatomy</a></li>
+      <li><a class="dropdown-item" href="#" data-module="all">All Questions</a></li>
+      <li><a class="dropdown-item" href="#" data-module="focs1">FOCS 1</a></li>
+      <li><a class="dropdown-item" href="#" data-module="focs2">FOCS 2</a></li>
+      <li><a class="dropdown-item" href="#" data-module="focs3">FOCS 3</a></li>
+      <li><a class="dropdown-item" href="#" data-module="focs4">FOCS 4</a></li>
+      <li><a class="dropdown-item" href="#" data-module="bcr1">BCR 1</a></li>
+      <li><a class="dropdown-item" href="#" data-module="bcr2">BCR 2</a></li>
+      <li><a class="dropdown-item" href="#" data-module="bcr3">BCR 3</a></li>
+      <li><a class="dropdown-item" href="#" data-module="bcr4">BCR 4</a></li>
+      <li><a class="dropdown-item" href="#" data-module="msk1">MSK 1</a></li>
+      <li><a class="dropdown-item" href="#" data-module="msk2">MSK 2</a></li>
+      <li><a class="dropdown-item" href="#" data-module="anatomy">Anatomy</a></li>
         </ul>
       </div>
     </div>
@@ -297,132 +302,76 @@
         <div class="col-12">
           <div class="card quiz-card">
             <div class="card-header bg-primary text-white">
-              <h5 class="mb-0">FOCS - Fundamentals of Clinical Science</h5>
+              <h5 class="mb-0">FOCS Modules</h5>
             </div>
             <div class="card-body">
               <div class="row mb-3">
                 <div class="col-md-9">
                   <div class="mb-3">
                     <h6>Filter by Question Status:</h6>
-                    <div class="btn-group" role="group">
-                      <button type="button" class="btn btn-outline-primary module-filter-btn" data-module="focs" data-filter="all">All Questions</button>
-                      <button type="button" class="btn btn-outline-success module-filter-btn" data-module="focs" data-filter="correct">Correct</button>
-                      <button type="button" class="btn btn-outline-danger module-filter-btn" data-module="focs" data-filter="incorrect">Incorrect</button>
-                      <button type="button" class="btn btn-outline-secondary module-filter-btn" data-module="focs" data-filter="unattempted">Unseen</button>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-3 text-end">
-                  <div class="module-stats" id="focs-stats">
-                    <div><strong>Total:</strong> <span id="focs-total">0</span></div>
-                    <div><strong>Completed:</strong> <span id="focs-completed">0</span></div>
-                    <div><strong>Accuracy:</strong> <span id="focs-accuracy">0%</span></div>
-                  </div>
-                </div>
-              </div>
+                    <div class="card-body row">
+          ${['focs1', 'focs2', 'focs3', 'focs4'].map(mod => `
+            <div class="col-md-3 mb-3">
+              <button class="btn btn-outline-primary w-100 module-filter-btn" data-module="${mod}" data-filter="all">${mod.toUpperCase()}</button>
             </div>
-          </div>
+          `).join('')}
         </div>
       </div>
+    </div>
+  </div>
       
       <!-- BCR Module -->
       <div class="row mb-4">
         <div class="col-12">
           <div class="card quiz-card">
             <div class="card-header bg-success text-white">
-              <h5 class="mb-0">BCR - Blood, Cardiovascular and Respiratory</h5>
+              <h5 class="mb-0">BCR Modules</h5>
             </div>
-            <div class="card-body">
-              <div class="row mb-3">
-                <div class="col-md-9">
-                  <div class="mb-3">
-                    <h6>Filter by Question Status:</h6>
-                    <div class="btn-group" role="group">
-                      <button type="button" class="btn btn-outline-primary module-filter-btn" data-module="bcr" data-filter="all">All Questions</button>
-                      <button type="button" class="btn btn-outline-success module-filter-btn" data-module="bcr" data-filter="correct">Correct</button>
-                      <button type="button" class="btn btn-outline-danger module-filter-btn" data-module="bcr" data-filter="incorrect">Incorrect</button>
-                      <button type="button" class="btn btn-outline-secondary module-filter-btn" data-module="bcr" data-filter="unattempted">Unseen</button>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-3 text-end">
-                  <div class="module-stats" id="bcr-stats">
-                    <div><strong>Total:</strong> <span id="bcr-total">0</span></div>
-                    <div><strong>Completed:</strong> <span id="bcr-completed">0</span></div>
-                    <div><strong>Accuracy:</strong> <span id="bcr-accuracy">0%</span></div>
-                  </div>
-                </div>
-              </div>
+            <div class="card-body row">
+          ${['bcr1', 'bcr2', 'bcr3', 'bcr4'].map(mod => `
+            <div class="col-md-3 mb-3">
+              <button class="btn btn-outline-success w-100 module-filter-btn" data-module="${mod}" data-filter="all">${mod.toUpperCase()}</button>
             </div>
-          </div>
+          `).join('')}
         </div>
       </div>
+    </div>
+  </div>
       
       <!-- MSK Module -->
       <div class="row mb-4">
         <div class="col-12">
           <div class="card quiz-card">
             <div class="card-header bg-info text-white">
-              <h5 class="mb-0">MSK - Musculoskeletal</h5>
+              <h5 class="mb-0">MSK Modules</h5>
             </div>
-            <div class="card-body">
-              <div class="row mb-3">
-                <div class="col-md-9">
-                  <div class="mb-3">
-                    <h6>Filter by Question Status:</h6>
-                    <div class="btn-group" role="group">
-                      <button type="button" class="btn btn-outline-primary module-filter-btn" data-module="msk" data-filter="all">All Questions</button>
-                      <button type="button" class="btn btn-outline-success module-filter-btn" data-module="msk" data-filter="correct">Correct</button>
-                      <button type="button" class="btn btn-outline-danger module-filter-btn" data-module="msk" data-filter="incorrect">Incorrect</button>
-                      <button type="button" class="btn btn-outline-secondary module-filter-btn" data-module="msk" data-filter="unattempted">Unseen</button>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-3 text-end">
-                  <div class="module-stats" id="msk-stats">
-                    <div><strong>Total:</strong> <span id="msk-total">0</span></div>
-                    <div><strong>Completed:</strong> <span id="msk-completed">0</span></div>
-                    <div><strong>Accuracy:</strong> <span id="msk-accuracy">0%</span></div>
-                  </div>
-                </div>
-              </div>
+            <div class="card-body row">
+          ${['msk1', 'msk2'].map(mod => `
+            <div class="col-md-6 mb-3">
+              <button class="btn btn-outline-info w-100 module-filter-btn" data-module="${mod}" data-filter="all">${mod.toUpperCase()}</button>
             </div>
-          </div>
+          `).join('')}
         </div>
       </div>
+    </div>
+  </div>
       
       <!-- Anatomy Module -->
       <div class="row mb-4">
         <div class="col-12">
           <div class="card quiz-card">
             <div class="card-header bg-warning text-dark">
-              <h5 class="mb-0">Anatomy</h5>
+              <h5 class="mb-0">Anatomy Module</h5>
             </div>
-            <div class="card-body">
-              <div class="row mb-3">
-                <div class="col-md-9">
-                  <div class="mb-3">
-                    <h6>Filter by Question Status:</h6>
-                    <div class="btn-group" role="group">
-                      <button type="button" class="btn btn-outline-primary module-filter-btn" data-module="anatomy" data-filter="all">All Questions</button>
-                      <button type="button" class="btn btn-outline-success module-filter-btn" data-module="anatomy" data-filter="correct">Correct</button>
-                      <button type="button" class="btn btn-outline-danger module-filter-btn" data-module="anatomy" data-filter="incorrect">Incorrect</button>
-                      <button type="button" class="btn btn-outline-secondary module-filter-btn" data-module="anatomy" data-filter="unattempted">Unseen</button>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-3 text-end">
-                  <div class="module-stats" id="anatomy-stats">
-                    <div><strong>Total:</strong> <span id="anatomy-total">0</span></div>
-                    <div><strong>Completed:</strong> <span id="anatomy-completed">0</span></div>
-                    <div><strong>Accuracy:</strong> <span id="anatomy-accuracy">0%</span></div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <div class="card-body row">
+          <div class="col-md-12">
+            <button class="btn btn-outline-warning w-100 module-filter-btn" data-module="anatomy" data-filter="all">ANATOMY</button>
           </div>
         </div>
       </div>
+    </div>
+  </div>
+</div>
       
       <!-- All Modules Option -->
       <div class="row mb-4">
@@ -488,12 +437,21 @@
   
   
   <script>
+    
     // Initialize with empty arrays for questions until they're loaded
-    const allQuestions = [];
-    const focsQuestions = [];
-    const bcrQuestions = [];
-    const mskQuestions = [];
-    const anatomyQuestions = [];
+const allQuestions = [];
+const focs1Questions = [];
+const focs2Questions = [];
+const focs3Questions = [];
+const focs4Questions = [];
+const bcr1Questions = [];
+const bcr2Questions = [];
+const bcr3Questions = [];
+const bcr4Questions = [];
+const msk1Questions = [];
+const msk2Questions = [];
+const anatomyQuestions = [];
+
     
     // App State
     let questions = [];
@@ -627,9 +585,16 @@
     }
     let moduleQuestions = {
       all: allQuestions,
-      focs: focsQuestions,
-      bcr: bcrQuestions,
-      msk: mskQuestions,
+      focs1: focs1Questions,
+      focs2: focs2Questions,
+      focs3: focs3Questions,
+      focs4: focs4Questions,
+      bcr1: bcr1Questions,
+      bcr2: bcr2Questions,
+      bcr3: bcr3Questions,
+      bcr4: bcr4Questions,
+      msk1: msk1Questions,
+      msk2: msk2Questions,
       anatomy: anatomyQuestions
     };
     
@@ -708,61 +673,83 @@
       window.topicGroups = topicGroups;
     }
     
-    // Add sample questions for testing
-    function addSampleQuestions() {
-      // FOCS questions
-      focsQuestions.push(...focsData);
-      
-      // Sample BCR question
-      bcrQuestions.push(...bcrData1);
-      
-      // Sample MSK question
-      mskQuestions.push({
-        question: "What is the primary cellular defect in Duchenne muscular dystrophy?",
-        options: [
-          "A) Deficiency of dystrophin protein",
-          "B) Abnormal myosin heavy chain",
-          "C) Defective acetylcholine receptors",
-          "D) Mitochondrial DNA mutations",
-          "E) Abnormal calcium channel function"
-        ],
-        correctIndex: 0,
-        explanations: [
-          "Correct: Duchenne muscular dystrophy is caused by mutations in the DMD gene leading to absence of functional dystrophin protein.",
-          "Incorrect: Myosin abnormalities are associated with some congenital myopathies, not DMD.",
-          "Incorrect: Acetylcholine receptor defects cause myasthenia gravis, not muscular dystrophy.",
-          "Incorrect: Mitochondrial DNA mutations cause mitochondrial myopathies, not DMD.",
-          "Incorrect: Calcium channel dysfunction is associated with periodic paralyses, not DMD."
-        ],
-        slideLink: "Neuromuscular Disorders, Slide 7",
-        topic: "Neuromuscular Disorders"
-      });
-      
-      // Sample Anatomy question
-      anatomyQuestions.push({
-        question: "Which of the following structures passes through the carpal tunnel?",
-        options: [
-          "A) Ulnar nerve",
-          "B) Ulnar artery",
-          "C) Radial artery",
-          "D) Median nerve",
-          "E) Superficial palmar arch"
-        ],
-        correctIndex: 3,
-        explanations: [
-          "Incorrect: The ulnar nerve passes through Guyon's canal, not the carpal tunnel.",
-          "Incorrect: The ulnar artery passes superficial to the flexor retinaculum in Guyon's canal.",
-          "Incorrect: The radial artery is located at the lateral aspect of the wrist, not in the carpal tunnel.",
-          "Correct: The median nerve passes through the carpal tunnel with the flexor tendons.",
-          "Incorrect: The superficial palmar arch is located in the palm, distal to the carpal tunnel."
-        ],
-        slideLink: "Upper Limb Anatomy Lecture 4",
-        topic: "Upper Limb Anatomy"
-      });
-      
-      // Add to all questions
-      allQuestions.push(...focsQuestions, ...bcrQuestions, ...mskQuestions, ...anatomyQuestions);
-    }
+   function addSampleQuestions() {
+  // Example placeholder: Replace these with actual data imports like `focs1Data`, etc.
+  focs1Questions.push(...focs1Data);
+  focs2Questions.push(...(focs2Data);
+  focs3Questions.push(...(focs3Data);
+  focs4Questions.push(...focs4Data);
+
+  bcr1Questions.push(...(bcrData1);
+  bcr2Questions.push(...(bcrData2);
+  bcr3Questions.push(...(bcrData3);
+  bcr4Questions.push(...(bcrData4);
+
+  msk1Questions.push({
+    question: "What enzyme is deficient in McArdle disease?",
+    options: [
+      "A) Glucose-6-phosphatase",
+      "B) Myophosphorylase",
+      "C) Glycogen synthase",
+      "D) Acid maltase"
+    ],
+    correctIndex: 1,
+    explanations: [
+      "Incorrect: Glucose-6-phosphatase deficiency causes von Gierke disease.",
+      "Correct: Myophosphorylase deficiency is the hallmark of McArdle disease.",
+      "Incorrect: Glycogen synthase catalyzes glycogen formation, not breakdown.",
+      "Incorrect: Acid maltase deficiency causes Pompe disease."
+    ],
+    slideLink: "Metabolism - Slide 9",
+    topic: "Glycogen Storage Diseases"
+  });
+
+  msk2Questions.push({
+    question: "Which joint is most commonly affected in osteoarthritis?",
+    options: [
+      "A) Elbow",
+      "B) Knee",
+      "C) Ankle",
+      "D) Wrist"
+    ],
+    correctIndex: 1,
+    explanations: [
+      "Incorrect: Elbow involvement is rare in OA.",
+      "Correct: The knee is the most commonly affected joint.",
+      "Incorrect: Ankle OA is usually post-traumatic.",
+      "Incorrect: Wrist OA is less common than knee or hip."
+    ],
+    slideLink: "Rheumatology - Slide 3",
+    topic: "Osteoarthritis"
+  });
+
+  anatomyQuestions.push({
+    question: "Which muscle is innervated by the thoracodorsal nerve?",
+    options: [
+      "A) Trapezius",
+      "B) Rhomboid major",
+      "C) Latissimus dorsi",
+      "D) Levator scapulae"
+    ],
+    correctIndex: 2,
+    explanations: [
+      "Incorrect: Trapezius is innervated by the spinal accessory nerve.",
+      "Incorrect: Rhomboids are innervated by the dorsal scapular nerve.",
+      "Correct: Thoracodorsal nerve innervates the latissimus dorsi.",
+      "Incorrect: Levator scapulae is also innervated by the dorsal scapular nerve."
+    ],
+    slideLink: "Upper Limb - Slide 5",
+    topic: "Shoulder Muscles"
+  });
+
+  // Populate allQuestions with all other modules
+  allQuestions.push(
+    ...focs1Questions, ...focs2Questions, ...focs3Questions, ...focs4Questions,
+    ...bcr1Questions, ...bcr2Questions, ...bcr3Questions, ...bcr4Questions,
+    ...msk1Questions, ...msk2Questions,
+    ...anatomyQuestions
+  );
+}
 
     // DOM Elements
     const dashboardLink = document.getElementById('dashboard-link');
@@ -865,8 +852,7 @@
       }
       
       // Check if there's a saved question index and module to resume from
-      const savedQuestionIndex = localStorage.getItem('lastQuestionIndex');
-      const savedModule = localStorage.getItem('lastModule');
+      localStorage.setItem(`lastQuestionIndex_${currentModule}`, currentQuestionIndex);
       
       if (savedModule && moduleQuestions[savedModule]) {
         currentModule = savedModule;
@@ -925,14 +911,10 @@
       }
       
       // Restore position if we have a saved index
-      if (savedQuestionIndex) {
-        // If we have a saved index, try to restore it
-        currentQuestionIndex = parseInt(savedQuestionIndex);
-        
-        // Ensure the index is valid
-        if (isNaN(currentQuestionIndex) || currentQuestionIndex >= questions.length) {
-          currentQuestionIndex = 0;
+      if (savedQuestionIndex && !isNaN(parseInt(savedQuestionIndex))) {
+          currentQuestionIndex = parseInt(savedQuestionIndex);
         }
+        
         
         // Add a resume banner
         const resumeBanner = document.createElement('div');
@@ -985,22 +967,64 @@
       updateDashboardStats();
       
       // Add a Resume Practice button to the dashboard if there's a saved session
-      if (savedQuestionIndex && savedModule) {
-        const resumeBtn = document.createElement('div');
-        resumeBtn.className = 'col-md-6 mb-4';
-        resumeBtn.innerHTML = `
-          <div class="card h-100 bg-light">
-            <div class="card-body">
-              <h5 class="card-title">Resume Your Progress</h5>
-              <p class="card-text">
-                Continue your last ${savedModule === 'all' ? 'practice session' : savedModule.toUpperCase() + ' module'} from question ${parseInt(savedQuestionIndex) + 1}.
-              </p>
-              <button id="resume-practice-btn" class="btn btn-primary">
-                <i class="bi bi-play-fill me-1"></i>Resume Practice
-              </button>
+      // Create resume buttons for each module with saved progress
+        const dashboardStatsRow = document.querySelector('#dashboard-stats-row');
+        
+        Object.keys(moduleQuestions).forEach((modKey) => {
+          if (modKey === 'all') return; // Skip 'all', which isn't a standalone module
+        
+          const savedIndex = localStorage.getItem(`lastQuestionIndex_${modKey}`);
+          if (!savedIndex || isNaN(parseInt(savedIndex))) return;
+        
+          const resumeDiv = document.createElement('div');
+          resumeDiv.className = 'col-md-6 mb-4';
+        
+          resumeDiv.innerHTML = `
+            <div class="card h-100 bg-light">
+              <div class="card-body">
+                <h5 class="card-title">Resume ${modKey.toUpperCase()}</h5>
+                <p class="card-text">
+                  Continue your last session from question ${parseInt(savedIndex) + 1}.
+                </p>
+                <button class="btn btn-primary resume-practice-btn" data-module="${modKey}">
+                  <i class="bi bi-play-fill me-1"></i>Resume Practice
+                </button>
+              </div>
             </div>
-          </div>
-        `;
+          `;
+        
+          dashboardStatsRow.insertBefore(resumeDiv, dashboardStatsRow.firstChild);
+        });
+
+        // Attach listener to all resume buttons
+        document.querySelectorAll('.resume-practice-btn').forEach(btn => {
+          btn.addEventListener('click', async () => {
+            const moduleKey = btn.dataset.module;
+            currentModule = moduleKey;
+        
+            const savedIndex = parseInt(localStorage.getItem(`lastQuestionIndex_${moduleKey}`), 10);
+        
+            const moduleName = moduleKey.toUpperCase();
+            currentModuleBadge.textContent = moduleName;
+        
+            const savedOrder = await fetchQuestionOrder(currentUserId, moduleKey);
+            const questionsList = moduleQuestions[moduleKey] || [];
+        
+            if (savedOrder && savedOrder.length > 0) {
+              const map = new Map(questionsList.map(q => [q.question, q]));
+              questions = savedOrder.map(q => map.get(q)).filter(Boolean);
+            } else {
+              questions = [...questionsList];
+            }
+        
+            currentQuestionIndex = isNaN(savedIndex) ? 0 : savedIndex;
+        
+            currentSessionStats = { attempted: 0, correct: 0 };
+            updateSessionStats();
+            loadQuestion();
+            switchView('practice');
+          });
+        });
         
         const dashboardStatsRow = document.querySelector('#dashboard-stats-row');
         if (dashboardStatsRow) {
@@ -2084,6 +2108,13 @@
           if (moduleType && filterType) {
             // Set the current module
             currentModule = moduleType;
+
+            const savedIndex = localStorage.getItem(`lastQuestionIndex_${moduleType}`);
+            if (savedIndex && !isNaN(parseInt(savedIndex))) {
+              currentQuestionIndex = parseInt(savedIndex);
+            } else {
+              currentQuestionIndex = 0;
+            }
             
             // Update the module badge text
             const moduleName = moduleType === 'all' ? 'All Modules' : moduleType.toUpperCase();
@@ -2272,6 +2303,11 @@
           // Clear local storage history
           userHistory = [];
           saveUserHistory();
+
+          // Remove saved resume index for every module
+          Object.keys(moduleQuestions).forEach(moduleKey => {
+            localStorage.removeItem(`lastQuestionIndex_${moduleKey}`);
+          });
           
           // If we have a user ID, clear database data too
           if (currentUserId) {
@@ -2357,10 +2393,9 @@
       
       // When switching to practice view, check if we should resume last session
       if (view === 'practice') {
-        const savedModule = localStorage.getItem('lastModule');
-        const savedQuestionIndex = localStorage.getItem('lastQuestionIndex');
+        const savedQuestionIndex = localStorage.getItem(`lastQuestionIndex_${currentModule}`);
         
-        if (savedModule && savedQuestionIndex !== null) {
+        if (savedQuestionIndex !== null) {
           // Only resume if we're not already in the correct position
           const parsedIndex = parseInt(savedQuestionIndex, 10);
           
