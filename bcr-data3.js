@@ -1121,8 +1121,6 @@ const bcrData3 = [
   "slideLink": "Lecture32_BCR.pdf"
 },
 {
-  "question": "Which of the following anticoagulants acts by inhibiting factor Xa directly?",
-{
   "question": "Which of the following factors most strongly influences the likelihood of infarction in an organ following arterial occlusion?",
   "options": [
     "A) Presence of dual circulation",
