@@ -8520,4 +8520,5 @@ const bcrData4 = [
   ],
   "slideLink": "Lecture60_BCR.pdf"
 }
+  
 ];
