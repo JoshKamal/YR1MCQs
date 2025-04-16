@@ -1,6 +1,5 @@
 // bcr-data.js
-const bcrData3 = [
-{
+const bcrData3 = [{
   "question": "Which intrinsic factor plays a dominant role in the autoregulation of cerebral blood flow?",
   "options": [
     "A) Sympathetic nervous control",
@@ -8516,5 +8515,4 @@ const bcrData3 = [
   ],
   "slideLink": "Lecture45_BCR.pdf"
 }
-  
 ];
