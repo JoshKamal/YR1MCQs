@@ -100,6 +100,14 @@
           <li class="nav-item">
             <a class="nav-link" id="modules-link" href="#"><i class="bi bi-grid-3x3-gap me-1"></i>Modules</a>
           </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="bi bi-person-circle me-1"></i><span id="username-display">User</span>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+              <li><a class="dropdown-item" id="logout-button" href="#"><i class="bi bi-box-arrow-right me-1"></i>Logout</a></li>
+            </ul>
+          </li>
         </ul>
       </div>
     </div>
@@ -234,19 +242,6 @@
           </button>
         </div>
       </div>
-      <div class="dropdown mt-2 mb-4">
-        <button class="btn btn-outline-primary dropdown-toggle" type="button" id="moduleDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-          Change Module
-        </button>
-        <ul class="dropdown-menu" aria-labelledby="moduleDropdown">
-          <li><a class="dropdown-item" href="#" data-module="all">All Questions</a></li>
-          <li><a class="dropdown-item" href="#" data-module="focs">FOCS</a></li>
-          <li><a class="dropdown-item" href="#" data-module="bcr">BCR</a></li>
-          <li><a class="dropdown-item" href="#" data-module="msk">MSK</a></li>
-          <li><a class="dropdown-item" href="#" data-module="anatomy">Anatomy</a></li>
-        </ul>
-      </div>
-    </div>
 
       <div class="row">
         <div class="col-md-6">
@@ -305,10 +300,10 @@
                   <div class="mb-3">
                     <h6>Filter by Question Status:</h6>
                     <div class="btn-group" role="group">
-                 
+                      <button type="button" class="btn btn-outline-primary module-filter-btn" data-module="focs" data-filter="all">All Questions</button>
                       <button type="button" class="btn btn-outline-success module-filter-btn" data-module="focs" data-filter="correct">Correct</button>
                       <button type="button" class="btn btn-outline-danger module-filter-btn" data-module="focs" data-filter="incorrect">Incorrect</button>
-                     
+                      <button type="button" class="btn btn-outline-secondary module-filter-btn" data-module="focs" data-filter="unattempted">Unseen</button>
                     </div>
                   </div>
                 </div>
@@ -338,10 +333,28 @@
                   <div class="mb-3">
                     <h6>Filter by Question Status:</h6>
                     <div class="btn-group" role="group">
-          
+                      <button type="button" class="btn btn-outline-primary module-filter-btn" data-module="bcr" data-filter="all">All Questions</button>
                       <button type="button" class="btn btn-outline-success module-filter-btn" data-module="bcr" data-filter="correct">Correct</button>
                       <button type="button" class="btn btn-outline-danger module-filter-btn" data-module="bcr" data-filter="incorrect">Incorrect</button>
-                      
+                      <button type="button" class="btn btn-outline-secondary module-filter-btn" data-module="bcr" data-filter="unattempted">Unseen</button>
+                    </div>
+                  </div>
+                  
+                  <div class="mt-4">
+                    <h6>Sub-Modules:</h6>
+                    <div class="row">
+                      <div class="col-md-3 mb-2">
+                        <button type="button" class="btn btn-outline-success w-100 module-filter-btn" data-module="bcr1" data-filter="all">BCR1</button>
+                      </div>
+                      <div class="col-md-3 mb-2">
+                        <button type="button" class="btn btn-outline-success w-100 module-filter-btn" data-module="bcr2" data-filter="all">BCR2</button>
+                      </div>
+                      <div class="col-md-3 mb-2">
+                        <button type="button" class="btn btn-outline-success w-100 module-filter-btn" data-module="bcr3" data-filter="all">BCR3</button>
+                      </div>
+                      <div class="col-md-3 mb-2">
+                        <button type="button" class="btn btn-outline-success w-100 module-filter-btn" data-module="bcr4" data-filter="all">BCR4</button>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -371,10 +384,22 @@
                   <div class="mb-3">
                     <h6>Filter by Question Status:</h6>
                     <div class="btn-group" role="group">
-                     
+                      <button type="button" class="btn btn-outline-primary module-filter-btn" data-module="msk" data-filter="all">All Questions</button>
                       <button type="button" class="btn btn-outline-success module-filter-btn" data-module="msk" data-filter="correct">Correct</button>
                       <button type="button" class="btn btn-outline-danger module-filter-btn" data-module="msk" data-filter="incorrect">Incorrect</button>
-                   
+                      <button type="button" class="btn btn-outline-secondary module-filter-btn" data-module="msk" data-filter="unattempted">Unseen</button>
+                    </div>
+                  </div>
+                  
+                  <div class="mt-4">
+                    <h6>Sub-Modules:</h6>
+                    <div class="row">
+                      <div class="col-md-6 mb-2">
+                        <button type="button" class="btn btn-outline-info w-100 module-filter-btn" data-module="msk1" data-filter="all">MSK1</button>
+                      </div>
+                      <div class="col-md-6 mb-2">
+                        <button type="button" class="btn btn-outline-info w-100 module-filter-btn" data-module="msk2" data-filter="all">MSK2</button>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -404,10 +429,10 @@
                   <div class="mb-3">
                     <h6>Filter by Question Status:</h6>
                     <div class="btn-group" role="group">
-                    
+                      <button type="button" class="btn btn-outline-primary module-filter-btn" data-module="anatomy" data-filter="all">All Questions</button>
                       <button type="button" class="btn btn-outline-success module-filter-btn" data-module="anatomy" data-filter="correct">Correct</button>
                       <button type="button" class="btn btn-outline-danger module-filter-btn" data-module="anatomy" data-filter="incorrect">Incorrect</button>
-                  
+                      <button type="button" class="btn btn-outline-secondary module-filter-btn" data-module="anatomy" data-filter="unattempted">Unseen</button>
                     </div>
                   </div>
                 </div>
@@ -478,21 +503,26 @@
     </div>
   </div>
 
-  <script src="bcr-data1.js"></script>
-  <script src="bcr-data2.js"></script>
-  <script src="bcr-data3.js"></script>
-  <script src="bcr-data4.js"></script>
-  <script src="focs-data.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  
   
   <script>
     // Initialize with empty arrays for questions until they're loaded
     const allQuestions = [];
     const focsQuestions = [];
+    
+    // BCR modules split into 4 versions
     const bcrQuestions = [];
+    const bcr1Questions = [];
+    const bcr2Questions = [];
+    const bcr3Questions = [];
+    const bcr4Questions = [];
+    
+    // MSK modules split into 2 versions
     const mskQuestions = [];
+    const msk1Questions = [];
+    const msk2Questions = [];
+    
     const anatomyQuestions = [];
     
     // App State
@@ -629,7 +659,13 @@
       all: allQuestions,
       focs: focsQuestions,
       bcr: bcrQuestions,
+      bcr1: bcr1Questions,
+      bcr2: bcr2Questions,
+      bcr3: bcr3Questions,
+      bcr4: bcr4Questions,
       msk: mskQuestions,
+      msk1: msk1Questions,
+      msk2: msk2Questions,
       anatomy: anatomyQuestions
     };
     
@@ -651,8 +687,19 @@
         // Initialize app after loading questions
         moduleQuestions.all = [...allQuestions];
         moduleQuestions.focs = [...focsQuestions];
+        
+        // BCR modules
         moduleQuestions.bcr = [...bcrQuestions];
+        moduleQuestions.bcr1 = [...bcr1Questions];
+        moduleQuestions.bcr2 = [...bcr2Questions];
+        moduleQuestions.bcr3 = [...bcr3Questions];
+        moduleQuestions.bcr4 = [...bcr4Questions];
+        
+        // MSK modules
         moduleQuestions.msk = [...mskQuestions];
+        moduleQuestions.msk1 = [...msk1Questions];
+        moduleQuestions.msk2 = [...msk2Questions];
+        
         moduleQuestions.anatomy = [...anatomyQuestions];
         
         // Log module questions
@@ -710,11 +757,99 @@
     
     // Add sample questions for testing
     function addSampleQuestions() {
+      // Helper function to distribute BCR questions into 4 modules
+      function distributeBCRQuestions() {
+        // Save original BCR questions
+        const allBCRQuestions = [...bcrQuestions];
+        
+        // Clear the array to refill it later
+        bcrQuestions.length = 0;
+        
+        // Distribute questions evenly among BCR1-4
+        allBCRQuestions.forEach((question, index) => {
+          const moduleIndex = index % 4; // 0, 1, 2, 3, 0, 1, ...
+          
+          // Add to specific module and back to the main BCR array
+          switch(moduleIndex) {
+            case 0:
+              bcr1Questions.push(question);
+              break;
+            case 1:
+              bcr2Questions.push(question);
+              break;
+            case 2:
+              bcr3Questions.push(question);
+              break;
+            case 3:
+              bcr4Questions.push(question);
+              break;
+          }
+          
+          // Add back to main BCR array
+          bcrQuestions.push(question);
+        });
+        
+        console.log("BCR questions distributed:");
+        console.log("BCR1 count:", bcr1Questions.length);
+        console.log("BCR2 count:", bcr2Questions.length);
+        console.log("BCR3 count:", bcr3Questions.length);
+        console.log("BCR4 count:", bcr4Questions.length);
+      }
+      
+      // Helper function to distribute MSK questions into 2 modules
+      function distributeMSKQuestions() {
+        // Save original MSK questions
+        const allMSKQuestions = [...mskQuestions];
+        
+        // Clear the array to refill it later
+        mskQuestions.length = 0;
+        
+        // Distribute questions evenly between MSK1-2
+        allMSKQuestions.forEach((question, index) => {
+          const moduleIndex = index % 2; // 0, 1, 0, 1, ...
+          
+          // Add to specific module and back to the main MSK array
+          if (moduleIndex === 0) {
+            msk1Questions.push(question);
+          } else {
+            msk2Questions.push(question);
+          }
+          
+          // Add back to main MSK array
+          mskQuestions.push(question);
+        });
+        
+        console.log("MSK questions distributed:");
+        console.log("MSK1 count:", msk1Questions.length);
+        console.log("MSK2 count:", msk2Questions.length);
+      }
+      
       // FOCS questions
-      focsQuestions.push(...focsData);
+      focsQuestions.push({
+                        
+    );
       
       // Sample BCR question
-      bcrQuestions.push(...bcrData1, ...bcrData2);
+      bcrQuestions.push({
+        question: "Which heart sound is associated with mitral stenosis?",
+        options: [
+          "A) Split S1",
+          "B) Opening snap",
+          "C) Midsystolic click",
+          "D) Summation gallop",
+          "E) Pericardial knock"
+        ],
+        correctIndex: 1,
+        explanations: [
+          "Incorrect: Split S1 can occur in bundle branch blocks but is not typical of mitral stenosis.",
+          "Correct: The opening snap is a high-pitched early diastolic sound heard after S2 in mitral stenosis.",
+          "Incorrect: Midsystolic click is associated with mitral valve prolapse, not stenosis.",
+          "Incorrect: Summation gallop occurs with tachycardia when S3 and S4 merge.",
+          "Incorrect: Pericardial knock is heard in constrictive pericarditis."
+        ],
+        slideLink: "Cardiovascular Examination, slide 31",
+        topic: "Cardiovascular Examination"
+      });
       
       // Sample MSK question
       mskQuestions.push({
@@ -760,8 +895,15 @@
         topic: "Upper Limb Anatomy"
       });
       
+      // Distribute BCR and MSK questions into sub-modules
+      distributeBCRQuestions();
+      distributeMSKQuestions();
+      
       // Add to all questions
       allQuestions.push(...focsQuestions, ...bcrQuestions, ...mskQuestions, ...anatomyQuestions);
+      
+      // Log the module distribution
+      console.log("Module question distribution complete");
     }
 
     // DOM Elements
@@ -807,21 +949,59 @@
     
     // Initialize app
     async function init() {
-      // First, ensure we have a user ID - either from local storage or create a new one
-      const savedUserId = localStorage.getItem('userID');
-      if (savedUserId) {
-        currentUserId = parseInt(savedUserId);
-      } else {
-        // Create a new guest user
-        currentUserId = await createGuestUser();
-        if (currentUserId) {
-          localStorage.setItem('userID', currentUserId);
+      // Check if we have a logged-in user from the session
+      try {
+        const userResponse = await fetch('/api/current-user');
+        if (userResponse.ok) {
+          const userData = await userResponse.json();
+          // Set the current user ID and display username
+          currentUserId = userData.id;
+          document.getElementById('username-display').textContent = userData.username;
+          
+          // Store user data in localStorage for reference
+          localStorage.setItem('currentUser', JSON.stringify(userData));
+          localStorage.setItem('userID', userData.id);
         } else {
-          // If creating a guest user fails, fall back to local storage only
-          console.warn('Failed to create guest user, falling back to local storage');
-          loadUserHistory();
+          // If not authenticated, redirect to login page
+          window.location.href = '/auth';
+          return; // Stop initialization since we're redirecting
+        }
+      } catch (error) {
+        console.error('Error checking authentication status:', error);
+        // If an error occurs, try to use localStorage as fallback
+        const savedUserId = localStorage.getItem('userID');
+        if (savedUserId) {
+          currentUserId = parseInt(savedUserId);
+        } else {
+          // If no authentication and no saved user, redirect to login
+          window.location.href = '/auth';
+          return;
         }
       }
+      
+      // Setup logout functionality
+      document.getElementById('logout-button').addEventListener('click', async (e) => {
+        e.preventDefault();
+        try {
+          const response = await fetch('/api/logout', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          });
+          
+          if (response.ok) {
+            // Clear local storage and redirect to login
+            localStorage.removeItem('currentUser');
+            localStorage.removeItem('userID');
+            window.location.href = '/auth';
+          } else {
+            console.error('Logout failed');
+          }
+        } catch (error) {
+          console.error('Error during logout:', error);
+        }
+      });
       
       // If we have a valid user ID, fetch history and question order from database
       if (currentUserId) {
@@ -2012,68 +2192,6 @@
       dashboardLink.addEventListener('click', () => switchView('dashboard'));
       practiceLink.addEventListener('click', async () => await switchView('practice'));
       modulesLink.addEventListener('click', () => switchView('topic-focus'));
-
-      document.querySelectorAll('.dropdown-menu a[data-module]').forEach(item => {
-        item.addEventListener('click', async (event) => {
-          event.preventDefault();
-          const module = event.target.dataset.module;
-          currentModule = module;
-
-           // Update badge
-          currentModuleBadge.textContent = module === 'all' ? 'All Questions' : module.toUpperCase();
-          
-          // Reset session stats
-          currentSessionStats = {
-            attempted: 0,
-            correct: 0
-          };
-          
-          
-          
-          // Check if we have a saved order for this module in localStorage
-          let savedOrder = null;
-          if (currentUserId) {
-            try {
-              savedOrder = await fetchQuestionOrder(currentUserId, module);
-              console.log(`Module ${module}: Found saved order with ${savedOrder ? savedOrder.length : 0} questions`);
-            } catch(error) {
-              console.error(`Error fetching order for module ${module}:`, error);
-            }
-          }
-          
-          if (savedOrder && Array.isArray(savedOrder) && savedOrder.length > 0) {
-            // We have a saved order, use it to maintain consistency
-            questions = [];
-            const allModuleQuestions = [...moduleQuestions[module]];
-            const questionMap = new Map(allModuleQuestions.map(q => [q.question, q]));
-            
-            // First add questions from the saved order
-            savedOrder.forEach(questionText => {
-              if (questionMap.has(questionText)) {
-                questions.push(questionMap.get(questionText));
-                questionMap.delete(questionText);
-              }
-            });
-            
-            // Add any new questions that weren't in the saved order
-            questionMap.forEach(q => questions.push(q));
-            
-            console.log(`Loaded ${questions.length} questions based on saved order for module ${module}`);
-          } else {
-            // No saved order, create a new one
-            // First get raw questions
-            questions = [...moduleQuestions[module]];
-            
-            // Then filter and shuffle them
-            await filterUnseenQuestions();
-          }
-          
-          // Load the first question
-          currentQuestionIndex = 0;
-          loadQuestion();
-          updateSessionStats();
-        });
-      });
       
       // Module filter buttons
       document.querySelectorAll('.module-filter-btn').forEach(btn => {
