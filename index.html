@@ -14376,7 +14376,26 @@
     );
       
       // Sample BCR question
-      bcrQuestions.push(...bcrData1, ...bcrData2);
+      bcrQuestions.push({
+        question: "What is the primary cellular defect in Duchenne muscular dystrophy?",
+        options: [
+          "A) Deficiency of dystrophin protein",
+          "B) Abnormal myosin heavy chain",
+          "C) Defective acetylcholine receptors",
+          "D) Mitochondrial DNA mutations",
+          "E) Abnormal calcium channel function"
+        ],
+        correctIndex: 0,
+        explanations: [
+          "Correct: Duchenne muscular dystrophy is caused by mutations in the DMD gene leading to absence of functional dystrophin protein.",
+          "Incorrect: Myosin abnormalities are associated with some congenital myopathies, not DMD.",
+          "Incorrect: Acetylcholine receptor defects cause myasthenia gravis, not muscular dystrophy.",
+          "Incorrect: Mitochondrial DNA mutations cause mitochondrial myopathies, not DMD.",
+          "Incorrect: Calcium channel dysfunction is associated with periodic paralyses, not DMD."
+        ],
+        slideLink: "Neuromuscular Disorders, Slide 7",
+        topic: "Neuromuscular Disorders"
+      });
       
       // Sample MSK question
       mskQuestions.push({
