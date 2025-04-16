@@ -5092,8 +5092,6 @@ const bcrData3 = [
   "slideLink": "Lecture39_BCR.pdf"
 },
 {
-  "question": "Which mechanism explains why aldosterone antagonists like spironolactone can reduce myocardial fibrosis in heart failure?",
-  "options":{
   "question": "Which compensatory mechanism in systolic heart failure is most directly responsible for fluid retention?",
   "options": [
     "A) Increased sympathetic activation",
