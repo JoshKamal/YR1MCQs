@@ -717,48 +717,10 @@
       bcrQuestions.push(...bcrData1, ...bcrData2, ...bcrData3, ...bcrData4);
       
       // Sample MSK question
-      mskQuestions.push({
-        question: "What is the primary cellular defect in Duchenne muscular dystrophy?",
-        options: [
-          "A) Deficiency of dystrophin protein",
-          "B) Abnormal myosin heavy chain",
-          "C) Defective acetylcholine receptors",
-          "D) Mitochondrial DNA mutations",
-          "E) Abnormal calcium channel function"
-        ],
-        correctIndex: 0,
-        explanations: [
-          "Correct: Duchenne muscular dystrophy is caused by mutations in the DMD gene leading to absence of functional dystrophin protein.",
-          "Incorrect: Myosin abnormalities are associated with some congenital myopathies, not DMD.",
-          "Incorrect: Acetylcholine receptor defects cause myasthenia gravis, not muscular dystrophy.",
-          "Incorrect: Mitochondrial DNA mutations cause mitochondrial myopathies, not DMD.",
-          "Incorrect: Calcium channel dysfunction is associated with periodic paralyses, not DMD."
-        ],
-        slideLink: "Neuromuscular Disorders, Slide 7",
-        topic: "Neuromuscular Disorders"
-      });
+      mskQuestions.push(...mskData1, ...mskData2);
       
       // Sample Anatomy question
-      anatomyQuestions.push({
-        question: "Which of the following structures passes through the carpal tunnel?",
-        options: [
-          "A) Ulnar nerve",
-          "B) Ulnar artery",
-          "C) Radial artery",
-          "D) Median nerve",
-          "E) Superficial palmar arch"
-        ],
-        correctIndex: 3,
-        explanations: [
-          "Incorrect: The ulnar nerve passes through Guyon's canal, not the carpal tunnel.",
-          "Incorrect: The ulnar artery passes superficial to the flexor retinaculum in Guyon's canal.",
-          "Incorrect: The radial artery is located at the lateral aspect of the wrist, not in the carpal tunnel.",
-          "Correct: The median nerve passes through the carpal tunnel with the flexor tendons.",
-          "Incorrect: The superficial palmar arch is located in the palm, distal to the carpal tunnel."
-        ],
-        slideLink: "Upper Limb Anatomy Lecture 4",
-        topic: "Upper Limb Anatomy"
-      });
+      anatomyQuestions.push(anatomyData);
       
       // Add to all questions
       allQuestions.push(...focsQuestions, ...bcrQuestions, ...mskQuestions, ...anatomyQuestions);
